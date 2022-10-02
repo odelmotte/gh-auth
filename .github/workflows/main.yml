@@ -38,7 +38,7 @@ jobs:
 
           ${{ steps.auth.outputs.federatedToken }} | Set-Content "federatedToken-build.txt"
 
-      - uses: actions/upload-artifact
+      - uses: actions/upload-artifact@v3
         with:
           name: fed-build
           path: federatedToken-build.txt
@@ -67,7 +67,7 @@ jobs:
           Write-Host "subjectClaim: ${{ steps.auth.outputs.subjectClaim }}"
 
           ${{ steps.auth.outputs.federatedToken }} | Set-Content "federatedToken-env.txt"
-      - uses: actions/upload-artifact
+      - uses: actions/upload-artifact@v3
         with:
           name: fed-env
           path: federatedToken-build.txt
