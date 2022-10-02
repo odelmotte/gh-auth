@@ -21,6 +21,9 @@ async function main() {
             if (!!federatedToken) {
                 let [issuer, subjectClaim] = await jwtParser(federatedToken);
                 console.log("Federated token details: \n issuer - " + issuer + " \n subject claim - " + subjectClaim);
+                core.setOutput('federatedToken', federatedToken);
+                core.setOutput('issuer', issuer);
+                core.setOutput('subjectClaim', subjectClaim);
             }
         }
         catch (error) {
@@ -40,8 +43,6 @@ async function main() {
     }
     finally {
         // Reset AZURE_HTTP_USER_AGENT
-        core.exportVariable('AZURE_HTTP_USER_AGENT', prefix);
-        core.exportVariable('AZUREPS_HOST_ENVIRONMENT', azPSHostEnv);
     }
 }
 

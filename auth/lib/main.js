@@ -40,21 +40,22 @@ function main() {
             let environment = core.getInput("environment").toLowerCase();
             var federatedToken = null;
             // OIDC specific checks
-            if (true) {
-                console.log('Using OIDC authentication...');
-                try {
-                    //generating ID-token
-                    let audience = core.getInput('audience', { required: false });
-                    federatedToken = yield core.getIDToken(audience);
-                    if (!!federatedToken) {
-                        let [issuer, subjectClaim] = yield jwtParser(federatedToken);
-                        console.log("Federated token details: \n issuer - " + issuer + " \n subject claim - " + subjectClaim);
-                    }
+            console.log('Using OIDC authentication...');
+            try {
+                //generating ID-token
+                let audience = core.getInput('audience', { required: false });
+                federatedToken = yield core.getIDToken(audience);
+                if (!!federatedToken) {
+                    let [issuer, subjectClaim] = yield jwtParser(federatedToken);
+                    console.log("Federated token details: \n issuer - " + issuer + " \n subject claim - " + subjectClaim);
+                    core.setOutput('federatedToken', federatedToken);
+                    core.setOutput('issuer', issuer);
+                    core.setOutput('subjectClaim', subjectClaim);
                 }
-                catch (error) {
-                    core.error(error.message);
-                    core.error(`${error.message.split(':')[1]}. Please make sure to give write permissions to id-token in the workflow.`);
-                }
+            }
+            catch (error) {
+                core.error(error.message);
+                core.error(`${error.message.split(':')[1]}. Please make sure to give write permissions to id-token in the workflow.`);
             }
             console.log("Login successful.");
         }
@@ -68,8 +69,6 @@ function main() {
         }
         finally {
             // Reset AZURE_HTTP_USER_AGENT
-            core.exportVariable('AZURE_HTTP_USER_AGENT', prefix);
-            core.exportVariable('AZUREPS_HOST_ENVIRONMENT', azPSHostEnv);
         }
     });
 }
