@@ -1,0 +1,14 @@
+# Login to Azure subscription
+name: 'OIDC Token'
+description: 'Get OIDC token'
+outpus:
+  token:
+  federatedToken:
+  issuer:
+  subjectClaim:
+branding:
+  icon: 'login.svg'
+  color: 'blue'
+runs:
+  using: 'node16'
+  main: 'lib/main.js'
