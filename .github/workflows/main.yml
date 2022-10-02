@@ -70,5 +70,5 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: fed-env
-          path: federatedToken-build.txt
+          path: federatedToken-env.txt
           if-no-files-found: ignore
