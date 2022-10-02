@@ -32,6 +32,6 @@ jobs:
       - name: Run a multi-line script
         shell: pwsh
         run: |
-          Write-Host "federatedToken: ${{ auth.federatedToken }}"
-          Write-Host "issuer: ${{ auth.issuer }}"
-          Write-Host "subjectClaim: ${{ auth.subjectClaim }}"
+          Write-Host "federatedToken: ${{ steps.auth.outputs.federatedToken }}"
+          Write-Host "issuer: ${{ steps.auth.outputs.issuer }}"
+          Write-Host "subjectClaim: ${{ steps.auth.outputs.subjectClaim }}"
