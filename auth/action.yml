@@ -1,11 +1,20 @@
 # Login to Azure subscription
 name: 'OIDC Token'
 description: 'Get OIDC token'
-outpus:
+inputs:
+  audience:
+    description: 'Provide audience field for access-token. Default value is api://AzureADTokenExchange'
+    required: false
+    default: 'api://AzureADTokenExchange'
+outputs:
   token:
+    description: ''
   federatedToken:
+    description: ''
   issuer:
+    description: ''
   subjectClaim:
+    description: ''
 branding:
   icon: 'login.svg'
   color: 'blue'
